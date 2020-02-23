@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block css_links %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+    
+{% block content %}
+	<div class="main-container">
+		<form action="" method="POST" novalidate>
+	        {{ form.hidden_tag() }}
+	        <p>
+	        {{ form.description(class_="form-control") }}
+	        {{ form.submit(class_="btn btn-dark") }}
+	    	</p>
+	    </form>
+	    <h5 class="center">Existing charts of <b>{{ current_user.username }}</b></h5>
+	    <table>
+	    	<tr>
+				<th>id</th>
+				<th>Description</th>
+			</tr>
+		{% for chart in charts: %}
+			<a href="{{ url_for('chart', id_by=chart.id_by_author) }}">
+			<tr class='clickable-row' data-href='{{ url_for("chart", id_by=chart.id_by_author) }}'>
+				<td class="td-id">{{ chart.id_by_author }}</td>
+				<td>{{ chart.description }}</td>
+			</tr>
+			</a>
+		{% endfor %}
+		</table>
+	</div>
+{% endblock %}
+
+
+{% block js_code %}
+<script>
+	jQuery(document).ready(function($) {
+    	$(".clickable-row").click(function() {
+        	window.location = $(this).data("href");
+    	});
+	});
+</script>
+{% endblock %}

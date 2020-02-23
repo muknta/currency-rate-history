@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block css_links %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+    
+{% block content %}
+	<div class="main-container">
+		<table class='fill-data'>
+		  <tr>
+		    <td align="right">Date:</td>
+		    <td class="right-td" align="left"><input class="form-control" type="date" name="currDate" id="currDate"></td>
+		  </tr>
+		  <tr>
+		    <td align="right">UAH to USD:</td>
+		    <td class="right-td" align="left"><input class="form-control" type="text" name="uah" id='uah2'></td>
+		  </tr>
+		  <tr>
+		    <td></td>
+		    <td class="right-td" align="center">
+		    	<table class='buttons'>
+		    		<tr>
+			    	<td><button id="addData" class="btn btn-dark">Add</button></td>
+			    	<td><button id="popData" class="btn btn-dark">Pop</button></td>
+		    		</tr>
+		    	</table>
+			</td>
+		  </tr>
+		</table>
+		
+		
+		<div id="canvasContainer">
+			<canvas id="currChart" width=".02em" height=".02em"></canvas>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block js_code %}
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

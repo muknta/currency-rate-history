@@ -1,0 +1,56 @@
+*[data-href] {
+  cursor: pointer;
+}
+
+.center {
+	text-align: center;
+}
+
+.form-control {
+	display: inline-block;
+	width: 60%;
+}
+
+.main-container {
+	margin: 40px 25% 0px;
+}
+
+.main-container form {
+	text-align: center;
+	margin: 60px 0 40px;
+}
+.main-container form * {
+	margin: 5px 0;
+}
+
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #393717;
+  color: white;
+}
+
+.td-id {
+	text-align: center;
+	width: 1%;
+}

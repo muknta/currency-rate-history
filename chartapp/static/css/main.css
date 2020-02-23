@@ -1,0 +1,35 @@
+
+body {
+	background-color: #FFF79E;
+}
+
+nav.navbar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	flex-direction: row;
+}
+nav.navbar > * {
+	margin-left: 2%;
+}
+
+.flashes {
+	z-index: 100;
+	position: absolute;
+	display: inline-block;
+	list-style: none;
+	background-color: #F25931;
+	padding: 7px 15px;
+	border-radius: 5px;
+
+}
+.flashes li {
+	text-align: right;
+	/*margin: auto;*/
+}
+
+
+#canvasContainer {
+	margin: 30px 6% 40px;
+}
+

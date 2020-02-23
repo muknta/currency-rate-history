@@ -1,0 +1,20 @@
+body {
+	text-align: center;
+}
+
+table.fill-data {
+	margin: 60px auto 40px;
+}
+
+table.buttons {
+	width: 100%;
+}
+
+td.right-td {
+	width: 30px;
+}
+
+table.buttons td * {
+	width: 100%;
+}
+

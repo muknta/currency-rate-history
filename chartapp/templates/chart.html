@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block css_links %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/chart.css') }}">
+{% endblock %}
+
+    
+{% block content %}
+	<div class="headers">
+		<h3><b>{{ chart.author_name }}</b>, {{ chart.id_by_author }}th chart</h3>
+		<h4><i>Description:</i> {{ chart.description }}</h4>
+	</div>
+	<table class='fill-data'>
+	  <form action="" method="POST" novalidate>
+		{{ form.hidden_tag() }}
+	  <tr>
+	    <td align="right">{{ form.date.label }}</td>
+	    <td class="right-td" align="left">{{ form.date(class_="form-control") }}</td>
+	  </tr>
+	  <tr>
+	    <td align="right">{{ form.uah.label }}</td>
+	    <td class="right-td" align="left">{{ form.uah(class_="form-control",min=0) }}</td>
+	  </tr>
+	  <tr>
+	    <td></td>
+	    <td class="right-td" align="center">
+	    	<table class='buttons'>
+	    		<tr>
+		    	<td>{{ form.add_btn(class_="btn btn-dark") }}</td>
+		    	<td>{{ form.pop_btn(class_="btn btn-dark") }}</td>
+	    		</tr>
+	    	</table>
+		</td>
+	  </tr>
+	  </form>
+	</table>
+	<div id="canvasContainer">
+		<canvas id="currChart" width=".02em" height=".02em"></canvas>
+	</div>
+{% endblock %}
+
+
+{% block js_code %}
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	<script>
+		setCurrData(labels={{ labels|tojson|safe }}, data={{ data|tojson|safe }});
+	</script>
+{% endblock %}
