@@ -9,7 +9,10 @@
     
 {% block content %}
 	<div class="headers">
-		<h3><b>{{ chart.author_name }}</b>, {{ chart.id_by_author }}th chart</h3>
+		<h3>
+			<b>{{ chart.author_name }}</b>, {{ chart.id_by_author }}th chart
+			<a href="{{ url_for('delete_chart', id_by=chart.id_by_author) }}" class="btn btn-light">Delete</a>
+		</h3>
 		<h4><i>Description:</i> {{ chart.description }}</h4>
 	</div>
 	<table class='fill-data'>

@@ -27,6 +27,16 @@ def db_session_add(new_elem, message=''):
 		db.session.rollback()
 
 
+def db_session_delete(query, del_id, message=''):
+	try:
+		del_item = db.session.query(query).get(del_id)
+		db.session.delete(del_item)
+		db.session.commit()
+		flash(message)
+	except:
+		db.session.rollback()
+
+
 @app.route('/')
 def index():
 	return render_template('index.html', title='CurrChart Index')
@@ -118,14 +128,9 @@ def pop_from_curr_data(form, chart_id):
 		count_query = query_by_chart_id.count()
 		last_elem = query_by_chart_id.order_by(CurrencyData.id.desc()).first()
 
-		try:
-			last_el_by_id = db.session.query(CurrencyData).filter_by(id=last_elem.id).first()
-			db.session.delete(last_el_by_id)
-			db.session.commit()
-			flash('deleted: id={}, uah={}, date={}'.format(
-				count_query, last_elem.uah, last_elem.date))
-		except:
-			db.session.rollback()
+		message = 'deleted: id={}, uah={}, date={}'.format(
+				count_query, last_elem.uah, last_elem.date)
+		db_session_delete(CurrencyData, last_elem.id, message)
 
 
 def extract_sorted_curr_data(chart_id):
@@ -160,6 +165,18 @@ def chart(id_by=0):
 	labels, data = extract_sorted_curr_data(chart_by.id)
 	return render_template('chart.html', chart=chart_by,
 		labels=labels, data=data, form=form, title='User Chart')
+
+
+@app.route('/chart/<id_by>/delete')
+@login_required
+def delete_chart(id_by=0):
+	chart_by = next((x for x in current_user.charts if x.id_by_author == int(id_by)), None)
+	if not chart_by:
+		return jsonify('404: Not Found'), 404
+
+	message = 'deleted chart: id={}, description="{}"'.format(id_by, chart_by.description)
+	db_session_delete(Chart, chart_by.id, message)
+	return redirect(url_for('user'))
 
 
 @app.route('/api-chart', methods=['GET', 'POST'])
