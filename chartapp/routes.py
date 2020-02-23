@@ -5,7 +5,6 @@ from flask_login import (
 	LoginManager,
 	login_user, login_required, logout_user, current_user
 )
-from .route_handlers import *
 from .forms import LoginForm, RegisterForm, ChartCreateForm, ChartUpdateForm
 from .models import User, Chart, CurrencyData
 
